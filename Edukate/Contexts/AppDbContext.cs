@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Edukate.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Edukate.Contexts
@@ -15,6 +16,8 @@ namespace Edukate.Contexts
             base.OnModelCreating(modelBuilder);
         }
         
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
     }
 }

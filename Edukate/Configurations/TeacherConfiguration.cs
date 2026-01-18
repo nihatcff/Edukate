@@ -8,8 +8,7 @@ namespace Edukate.Configurations
     {
         public void Configure(EntityTypeBuilder<Teacher> builder)
         {
-            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(256);
-            builder.Property(x => x.LastName).IsRequired().HasMaxLength(256);
+            builder.Property(x => x.Fullname).IsRequired().HasMaxLength(512);
         }
     }
 }

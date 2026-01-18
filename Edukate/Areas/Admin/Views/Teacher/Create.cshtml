@@ -1,0 +1,36 @@
+﻿@model TeacherCreateVM
+
+<div class="container">
+	<div class="row">
+
+		<form method="post" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly"></div>
+			<div><h2>Add New Teacher</h2></div>
+			<div class="form-group">
+				<label asp-for="Fullname">Fullname</label>
+				<input asp-for="Fullname" class="form-control" placeholder="add Fullname">
+				<span asp-validation-for="Fullname" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="CourseId">CourseId</label>
+				<select asp-for="CourseId"> 
+					<option selected disabled value="">---Select Course---</option>
+					@foreach (Course course in ViewBag.Courses)
+							{
+								<option value="@course.Id">@course.Title</option>
+							}
+				</select>
+				<span asp-validation-for="CourseId" class="text-danger"></span>
+			</div>
+
+
+			<button type="submit" class="btn btn-primary">Create</button>
+			<a asp-action="Index" class="btn btn-danger">Cancel</a>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial"></partial>
+}

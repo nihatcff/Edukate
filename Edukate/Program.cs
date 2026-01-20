@@ -1,17 +1,21 @@
 using Edukate.Contexts;
+using Edukate.Helpers;
 using Edukate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Edukate
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<DbContextInitializer>();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
@@ -27,6 +31,11 @@ namespace Edukate
 
             var app = builder.Build();
 
+            var scope = app.Services.CreateScope();
+
+            var contextInitialize = scope.ServiceProvider.GetRequiredService<DbContextInitializer>();
+
+            await contextInitialize.InitializeDatabaseAsync();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

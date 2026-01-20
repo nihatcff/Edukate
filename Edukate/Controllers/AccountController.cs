@@ -70,7 +70,6 @@ namespace Edukate.Controllers
                 return View(vm);
             }
 
-            await _signInManager.SignInAsync(user, isPersistent: false);
 
             return RedirectToAction("Index", "Home");
         }
